@@ -147,23 +147,183 @@ init_mathjax();
           </div>
           
         </header>
-    <div id="tipue_search_content">1.李承澤 40723210 << <a href='1.李承澤 40723210.html'>Previous</a> <a href='配置可攜程式環境.html'>Next</a> >> 配置可攜程式環境<br /><h1>1.張詠全40723125</h1>
-<p>修改proxy</p>
-<p>1. 開啟 Chrome 瀏覽器</p>
-<p>2. 點選右上方三條線的方塊。</p>
-<p>3. 點選「設定」。</p>
-<p>4. 點選「顯示進階設定…」</p>
-<p>5. 選擇網路項目的「開啟 Proxy 設定…」。</p>
-<p>6. 選擇連線頁面的「區域網路設定」。</p>
-<p>7點選「LAN設定」。</p>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/tjDA1jMLxHw" width="560"></iframe></p>
-<p></p>
-<p><strong> 更改網路設定</strong></p>
-<p><strong>1.點選網路與網際設定</strong></p>
-<p><strong>2.變更介面卡選項</strong></p>
-<p><strong>3.選擇你連線的網路&gt;右鍵&gt;內容。進行更改</strong></p>
-<p><strong><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/EaD7hsACBLQ" width="560"></iframe></strong></p>
-<p></p><br />1.李承澤 40723210 << <a href='1.李承澤 40723210.html'>Previous</a> <a href='配置可攜程式環境.html'>Next</a> >> 配置可攜程式環境</div>
+    <div id="tipue_search_content">國旗 << <a href='國旗.html'>Previous</a> <a href='齒輪.html'>Next</a> >> 齒輪<br /><h1>國旗-改</h1>
+<p>By : <a href="https://s40723210.github.io/40723210/content/%E5%9C%8B%E6%97%97-%E6%94%B92.html">40723210</a></p>
+<!-- for Brython -->
+<script src="./../static/brython.js"></script>
+<script src="./../static/brython_stdlib.js"></script>
+<!-- 啟動 brython() -->
+<p>
+<script>
+window.onload=function(){
+brython(1);
+}
+</script>
+</p>
+<!-- 以下利用 Brython 程式執行繪圖 -->
+<p><canvas height="400" id="taiwan_flag" width="600"></canvas></p>
+<p>
+<script type="text/python3">
+# 導入 doc
+from browser import document as doc
+import math
+   
+# 準備繪圖畫布
+canvas = doc["taiwan_flag"]
+ctx = canvas.getContext("2d")
+# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
+# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
+# 以下採用 canvas 原始座標繪圖
+flag_w = canvas.width
+flag_h = canvas.height
+circle_x = flag_w/2
+circle_y = flag_h/2
+# 先畫滿地紅
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w/3, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為紅色
+ctx.fillStyle = '#ff0000'
+ctx.fill()
+# 再畫青天
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w/5, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為藍色
+ctx.fillStyle = '#0000dd'
+ctx.fill()
+# 畫十二道光芒白日
+ctx.beginPath()
+star_radius = flag_w/8
+angle = 0
+for i in range(24):
+    angle += 5*math.pi*2/12
+    toX = circle_x + math.cos(angle)*star_radius
+    toY = circle_y + math.sin(angle)*star_radius
+    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo
+    if (i):
+        ctx.lineTo(toX, toY)
+    else:
+        ctx.moveTo(toX, toY)
+ctx.closePath()
+# 將填色設為白色
+ctx.fillStyle = '#fff'
+ctx.fill()
+# 白日:藍圈
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為藍色
+ctx.fillStyle = 'rgb(0, 0, 149)'
+ctx.fill()
+# 白日:白心
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為白色
+ctx.fillStyle = '#fff'
+ctx.fill()
+</script>
+</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- for Brython --&gt;
+&lt;script src="./../static/brython.js"&gt;&lt;/script&gt;
+&lt;script src="./../static/brython_stdlib.js"&gt;&lt;/script&gt;
+&lt;!-- 啟動 brython() --&gt;
+&lt;p&gt;
+&lt;script&gt;// &lt;![CDATA[
+window.onload=function(){
+brython(1);
+}
+// ]]&gt;&lt;/script&gt;
+&lt;/p&gt;
+&lt;!-- 以下利用 Brython 程式執行繪圖 --&gt;
+&lt;p&gt;&lt;canvas height="400" id="taiwan_flag" width="600"&gt;&lt;/canvas&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;script type="text/python3"&gt;// &lt;![CDATA[
+# 導入 doc
+from browser import document as doc
+import math
+   
+# 準備繪圖畫布
+canvas = doc["taiwan_flag"]
+ctx = canvas.getContext("2d")
+# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
+# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
+# 以下採用 canvas 原始座標繪圖
+flag_w = canvas.width
+flag_h = canvas.height
+circle_x = flag_w/2
+circle_y = flag_h/2
+# 先畫滿地紅
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w/3, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為紅色
+ctx.fillStyle = '#ff0000'
+ctx.fill()
+# 再畫青天
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w/5, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為藍色
+ctx.fillStyle = '#0000dd'
+ctx.fill()
+# 畫十二道光芒白日
+ctx.beginPath()
+star_radius = flag_w/8
+angle = 0
+for i in range(24):
+    angle += 5*math.pi*2/12
+    toX = circle_x + math.cos(angle)*star_radius
+    toY = circle_y + math.sin(angle)*star_radius
+    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo
+    if (i):
+        ctx.lineTo(toX, toY)
+    else:
+        ctx.moveTo(toX, toY)
+ctx.closePath()
+# 將填色設為白色
+ctx.fillStyle = '#fff'
+ctx.fill()
+# 白日:藍圈
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為藍色
+ctx.fillStyle = 'rgb(0, 0, 149)'
+ctx.fill()
+# 白日:白心
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為白色
+ctx.fillStyle = '#fff'
+ctx.fill()
+// ]]&gt;&lt;/script&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;!-- for Brython --&gt;
+&lt;script src="./../static/brython.js"&gt;&lt;/script&gt;
+&lt;script src="./../static/brython_stdlib.js"&gt;&lt;/script&gt;
+&lt;!-- 啟動 brython() --&gt;
+&lt;p&gt;
+&lt;script&gt;// &lt;![CDATA[
+window.onload=function(){
+brython(1);
+}
+// ]]&gt;&lt;/script&gt;</pre>
+<p><br/><br/></p>
+<!-- for Brython -->
+<script src="/get_page/static/brython.js"></script>
+<script src="/get_page/static/brython_stdlib.js"></script>
+<!-- 啟動 brython() -->
+<p>
+<script>
+window.onload=function(){
+brython(1);
+}
+</script>
+</p><br />國旗 << <a href='國旗.html'>Previous</a> <a href='齒輪.html'>Next</a> >> 齒輪</div>
         
     <!-- footer -->
       <div class="container">
