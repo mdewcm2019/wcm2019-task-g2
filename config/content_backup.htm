@@ -92,16 +92,661 @@
 <p>我的blogger文章:<a href="https://40723210.blogspot.com/2019/06/virtual-host-2.html">https://40723210.blogspot.com/2019/06/virtual-host-2.html</a></p>
 <p><span>根據老師的教學步驟:</span><br/><span><br/></span><span></span><span><span>1. 安裝最新版的 Virtualbox</span><br/><span>2. 建立 Ubuntu 18.04 虛擬主機</span><br/><span>3. 以網路卡橋接啟動 Ubuntu 伺服器</span><br/><span>4. 以 sudo apt install nginx 安裝 nginx WWW 伺服器</span><br/><span>5. 以 ifconfig 查 Ubuntu 伺服器的 IP, 測試 nginx 伺服器是否可以連線</span><br/><span>6. 以 Windows 10  下的 Filezilla client, 將編輯好的 nginx 設定檔案送到 Ubuntu</span><br/><span>7. 利用 Ubuntu 指令將設定檔案搬至設定位置後, 以 /etc/init.d/nginx restart 重新啟動 nginx</span><br/><span>8. 在 Ubuntu 中以 sudo apt install uwsgi 安裝 uwsgi</span><br/><span>9. 在 Windows 10 編輯 uwsgi 與 nginx 所需的設定檔案, 完成後以 filezilla 送至 Ubuntu.</span><br/><span>10. 將 CMSimfly 程式碼送到 Ubuntu 伺服器中對應目錄後.</span><br/><span>11. 在 Ubuntu 建立 cmsimfly 服務, 並設定隨機啟動.</span><br/><span>12. 完成後, 在 Windows 10 以瀏覽器連線至 CMSimfly, 確認動態網頁與靜態網頁可以在虛擬主機中正常啟動.</span></span><br/><br/><span><span>老師的blogger:</span></span><span><a href="https://2019wcm.blogspot.com/">https://2019wcm.blogspot.com/</a></span><br/><br/><span>最後我完成的虛擬主機連結:192.168.56.102</span><br/><span>我的操作影片1:</span><span><a href="https://youtu.be/Aj-_ISvdLGI" target="_blank">https://youtu.be/Aj-_ISvdLGI</a></span><br/><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" data-mce-fragment="1" frameborder="0" height="390" src="https://www.youtube.com/embed/Aj-_ISvdLGI" width="590"></iframe><span></span><span><br/></span><span></span><span>我的操作影片2:</span><span><a href="https://youtu.be/SVL-Hk0yNew" target="_blank">https://youtu.be/SVL-Hk0yNew</a></span><br/><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" data-mce-fragment="1" frameborder="0" height="390" src="https://www.youtube.com/embed/SVL-Hk0yNew" width="590"></iframe></p>
 <h1>Javascript</h1>
-<p><span>設法利用 </span><a href="http://mde.tw/wcm2019/content/%E5%AF%A6%E7%BF%92%E9%A0%85%E7%9B%AE%E4%B8%89.html">HTML5 CSS 與 Javascript</a><span>, 納入與機械設計相關的靜態網頁內容</span></p>
+<p><span>設法利用 </span><a href="http://mde.tw/wcm2019/content/%E5%AF%A6%E7%BF%92%E9%A0%85%E7%9B%AE%E4%B8%89.html">HTML5 CSS 與 Javascript</a><span>, 納入與機械設計相關的靜態網頁內容6</span></p>
 <p><span></span></p>
-<h2><span>國旗</span></h2>
-<p><span></span></p>
+<h2>國旗</h2>
+<!-- for Brython -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- 啟動 brython() -->
+<p>
+<script>
+window.onload=function(){
+brython(1);
+}
+</script>
+</p>
+<!-- 以下利用 Brython 程式執行繪圖 -->
+<p><canvas height="400" id="taiwan_flag" width="600"></canvas></p>
+<p>
+<script type="text/python3">
+# 導入 doc
+from browser import document as doc
+import math
+   
+# 準備繪圖畫布
+canvas = doc["taiwan_flag"]
+ctx = canvas.getContext("2d")
+# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
+# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
+# 以下採用 canvas 原始座標繪圖
+flag_w = canvas.width
+flag_h = canvas.height
+circle_x = flag_w/4
+circle_y = flag_h/4
+# 先畫滿地紅
+ctx.fillStyle='rgb(255, 0, 0)'
+ctx.fillRect(0,0,flag_w,flag_h)
+# 再畫青天
+ctx.fillStyle='rgb(0, 0, 150)'
+ctx.fillRect(0,0,flag_w/2,flag_h/2)
+# 畫十二道光芒白日
+ctx.beginPath()
+star_radius = flag_w/8
+angle = 0
+for i in range(24):
+    angle += 5*math.pi*2/12
+    toX = circle_x + math.cos(angle)*star_radius
+    toY = circle_y + math.sin(angle)*star_radius
+    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo
+    if (i):
+        ctx.lineTo(toX, toY)
+    else:
+        ctx.moveTo(toX, toY)
+ctx.closePath()
+# 將填色設為白色
+ctx.fillStyle = '#fff'
+ctx.fill()
+# 白日:藍圈
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為藍色
+ctx.fillStyle = 'rgb(0, 0, 149)'
+ctx.fill()
+# 白日:白心
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為白色
+ctx.fillStyle = '#fff'
+ctx.fill()
+</script>
+</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- for Brython --&gt;
+&lt;script src="/static/brython.js"&gt;&lt;/script&gt;
+&lt;script src="/static/brython_stdlib.js"&gt;&lt;/script&gt;
+&lt;!-- 啟動 brython() --&gt;
+&lt;p&gt;
+&lt;script&gt;
+window.onload=function(){
+brython(1);
+}
+&lt;/script&gt;
+&lt;/p&gt;
+&lt;!-- 以下利用 Brython 程式執行繪圖 --&gt;
+&lt;p&gt;&lt;canvas height="400" id="taiwan_flag" width="600"&gt;&lt;/canvas&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;script type="text/python3"&gt;
+# 導入 doc
+from browser import document as doc
+import math
+  
+# 準備繪圖畫布
+canvas = doc["taiwan_flag"]
+ctx = canvas.getContext("2d")
+# 進行座標轉換, x 軸不變, y 軸反向且移動 canvas.height 單位光點
+# ctx.setTransform(1, 0, 0, -1, 0, canvas.height)
+# 以下採用 canvas 原始座標繪圖
+flag_w = canvas.width
+flag_h = canvas.height
+circle_x = flag_w/4
+circle_y = flag_h/4
+# 先畫滿地紅
+ctx.fillStyle='rgb(255, 0, 0)'
+ctx.fillRect(0,0,flag_w,flag_h)
+# 再畫青天
+ctx.fillStyle='rgb(0, 0, 150)'
+ctx.fillRect(0,0,flag_w/2,flag_h/2)
+# 畫十二道光芒白日
+ctx.beginPath()
+star_radius = flag_w/8
+angle = 0
+for i in range(24):
+    angle += 5*math.pi*2/12
+    toX = circle_x + math.cos(angle)*star_radius
+    toY = circle_y + math.sin(angle)*star_radius
+    # 只有 i 為 0 時移動到 toX, toY, 其餘都進行 lineTo
+    if (i):
+        ctx.lineTo(toX, toY)
+    else:
+        ctx.moveTo(toX, toY)
+ctx.closePath()
+# 將填色設為白色
+ctx.fillStyle = '#fff'
+ctx.fill()
+# 白日:藍圈
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w*17/240, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為藍色
+ctx.fillStyle = 'rgb(0, 0, 149)'
+ctx.fill()
+# 白日:白心
+ctx.beginPath()
+ctx.arc(circle_x, circle_y, flag_w/16, 0, math.pi*2, True)
+ctx.closePath()
+# 填色設為白色
+ctx.fillStyle = '#fff'
+ctx.fill()
+&lt;/script&gt;</pre><h3>國旗-改</h3>
 <p></p>
-<h1>期中報告</h1>
+<h2>齒輪</h2>
+<!-- 導入 Brython 標準程式庫 -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<p></p>
+<!-- 啟動 Brython -->
+<script>
+window.onload=function(){
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./../data/py']});
+}
+</script>
+<p><canvas height="600" id="onegear" width="800"></canvas></p>
+<!-- 以下製作 button-->
+<div height="20" id="onegear_div" width="800"></div>
+<p><input id="n" type="text" value="22"/><br/> <button id="button">Set Number of Gears</button></p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">&lt;!-- 導入 Brython 標準程式庫 --&gt;
+&lt;script src="/static/brython.js"&gt;&lt;/script&gt;
+&lt;script src="/static/brython_stdlib.js"&gt;&lt;/script&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;!-- 啟動 Brython --&gt;
+&lt;script&gt;
+window.onload=function(){
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./../data/py']});
+}
+&lt;/script&gt;
+&lt;p&gt;&lt;canvas height="600" id="onegear" width="800"&gt;&lt;/canvas&gt;&lt;/p&gt;
+&lt;!-- 以下製作 button--&gt;
+&lt;div height="20" id="onegear_div" width="800"&gt;&lt;/div&gt;
+&lt;p&gt;&lt;input id="n" type="text" value="22"&gt;&lt;br&gt; &lt;button id="button"&gt;Set Number of Gears&lt;/button&gt;&lt;/p&gt;
+&lt;!-- 以下實際利用  Brython 繪圖--&gt;
+&lt;script type="text/python3"&gt;
+from browser import document as doc
+import math
+# deg 為角度轉為徑度的轉換因子
+deg = math.pi/180.
+# 定義 Spur 類別
+class Spur(object):
+    def __init__(self, ctx):
+        self.ctx = ctx
+  
+    def create_line(self, x1, y1, x2, y2, width=3, fill="red"):
+        self.ctx.beginPath()
+        self.ctx.lineWidth = width
+        self.ctx.moveTo(x1, y1)
+        self.ctx.lineTo(x2, y2)
+        self.ctx.strokeStyle = fill
+        self.ctx.stroke()
+  
+    # 定義一個繪正齒輪的繪圖函式
+    # midx 為齒輪圓心 x 座標
+    # midy 為齒輪圓心 y 座標
+    # rp 為節圓半徑, n 為齒數
+    # pa 為壓力角 (deg)
+    # rot 為旋轉角 (deg)
+    # 已經針對 n 大於等於 52 齒時的繪圖錯誤修正, 因為 base circle 與齒根圓大小必須進行判斷
+    def Gear(self, midx, midy, rp, n=20, pa=20, color="black"):
+        # 齒輪漸開線分成 15 線段繪製
+        imax = 15
+        # 在輸入的畫布上繪製直線, 由圓心到節圓 y 軸頂點畫一直線
+        self.create_line(midx, midy, midx, midy-rp)
+        # a 為模數 (代表公制中齒的大小), 模數為節圓直徑(稱為節徑)除以齒數
+        # 模數也就是齒冠大小
+        a=2*rp/n
+        # d 為齒根大小, 為模數的 1.157 或 1.25倍, 這裡採 1.25 倍
+        d=2.5*rp/n
+        # ra 為齒輪的外圍半徑
+        ra=rp+a
+        # rb 則為齒輪的基圓半徑
+        # 基圓為漸開線長齒之基準圓
+        rb=rp*math.cos(pa*deg)
+        # rd 為齒根圓半徑
+        rd=rp-d
+        # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+        # dr 則為基圓到齒頂圓半徑分成 imax 段後的每段半徑增量大小
+        # 將圓弧分成 imax 段來繪製漸開線
+        # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+        if rd&gt;rb:
+            dr = (ra-rd)/imax
+        else:
+            dr=(ra-rb)/imax
+        # tan(pa*deg)-pa*deg 為漸開線函數
+        sigma=math.pi/(2*n)+math.tan(pa*deg)-pa*deg
+        for j in range(n):
+            ang=-2.*j*math.pi/n+sigma
+            ang2=2.*j*math.pi/n+sigma
+            lxd=midx+rd*math.sin(ang2-2.*math.pi/n)
+            lyd=midy-rd*math.cos(ang2-2.*math.pi/n)
+            for i in range(imax+1):
+                # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+                if rd&gt;rb:
+                    r=rd+i*dr
+                else:
+                    r=rb+i*dr
+                theta=math.sqrt((r*r)/(rb*rb)-1.)
+                alpha=theta-math.atan(theta)
+                xpt=r*math.sin(alpha-ang)
+                ypt=r*math.cos(alpha-ang)
+                xd=rd*math.sin(-ang)
+                yd=rd*math.cos(-ang)
+                # i=0 時, 繪線起點由齒根圓上的點, 作為起點
+                if(i==0):
+                    last_x = midx+xd
+                    last_y = midy-yd
+                # 由左側齒根圓作為起點, 除第一點 (xd,yd) 齒根圓上的起點外, 其餘的 (xpt,ypt)則為漸開線上的分段點
+                self.create_line((midx+xpt),(midy-ypt),(last_x),(last_y),fill=color)
+                # 最後一點, 則為齒頂圓
+                if(i==imax):
+                    lfx=midx+xpt
+                    lfy=midy-ypt
+                last_x = midx+xpt
+                last_y = midy-ypt
+            # the line from last end of dedendum point to the recent
+            # end of dedendum point
+            # lxd 為齒根圓上的左側 x 座標, lyd 則為 y 座標
+            # 下列為齒根圓上用來近似圓弧的直線
+            self.create_line((lxd),(lyd),(midx+xd),(midy-yd),fill=color)
+            for i in range(imax+1):
+                # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+                if rd&gt;rb:
+                    r=rd+i*dr
+                else:
+                    r=rb+i*dr
+                theta=math.sqrt((r*r)/(rb*rb)-1.)
+                alpha=theta-math.atan(theta)
+                xpt=r*math.sin(ang2-alpha)
+                ypt=r*math.cos(ang2-alpha)
+                xd=rd*math.sin(ang2)
+                yd=rd*math.cos(ang2)
+                # i=0 時, 繪線起點由齒根圓上的點, 作為起點
+                if(i==0):
+                    last_x = midx+xd
+                    last_y = midy-yd
+                # 由右側齒根圓作為起點, 除第一點 (xd,yd) 齒根圓上的起點外, 其餘的 (xpt,ypt)則為漸開線上的分段點
+                self.create_line((midx+xpt),(midy-ypt),(last_x),(last_y),fill=color)
+                # 最後一點, 則為齒頂圓
+                if(i==imax):
+                    rfx=midx+xpt
+                    rfy=midy-ypt
+                last_x = midx+xpt
+                last_y = midy-ypt
+            # lfx 為齒頂圓上的左側 x 座標, lfy 則為 y 座標
+            # 下列為齒頂圓上用來近似圓弧的直線
+            self.create_line(lfx,lfy,rfx,rfy,fill=color)
+canvas = doc['onegear']
+ctx = canvas.getContext("2d")
+  
+# 以 button 驅動的事件函式
+def setgearnumber(e):
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    x = (canvas.width)/2
+    y = (canvas.height)/2
+    if doc["n"].value.isdigit():
+        n1 = int(doc["n"].value)
+    else:
+        n1= 25
+    # 設定齒輪參數
+    x = (canvas.width)/2
+    y = (canvas.height)/2
+    r = 0.6*(canvas.height/2)
+    pa = 20
+    # 繪出齒輪
+    Spur(ctx).Gear(x, y, r, n1, pa, "blue")
+#判定 button
+setgearnumber(True)
+doc['button'].bind('click',setgearnumber)
+&lt;/script&gt;</pre>
+<p></p>
+<!-- 以下實際利用  Brython 繪圖-->
+<script type="text/python3">
+from browser import document as doc
+import math
+# deg 為角度轉為徑度的轉換因子
+deg = math.pi/180.
+# 定義 Spur 類別
+class Spur(object):
+    def __init__(self, ctx):
+        self.ctx = ctx
+  
+    def create_line(self, x1, y1, x2, y2, width=3, fill="red"):
+        self.ctx.beginPath()
+        self.ctx.lineWidth = width
+        self.ctx.moveTo(x1, y1)
+        self.ctx.lineTo(x2, y2)
+        self.ctx.strokeStyle = fill
+        self.ctx.stroke()
+  
+    # 定義一個繪正齒輪的繪圖函式
+    # midx 為齒輪圓心 x 座標
+    # midy 為齒輪圓心 y 座標
+    # rp 為節圓半徑, n 為齒數
+    # pa 為壓力角 (deg)
+    # rot 為旋轉角 (deg)
+    # 已經針對 n 大於等於 52 齒時的繪圖錯誤修正, 因為 base circle 與齒根圓大小必須進行判斷
+    def Gear(self, midx, midy, rp, n=20, pa=20, color="black"):
+        # 齒輪漸開線分成 15 線段繪製
+        imax = 15
+        # 在輸入的畫布上繪製直線, 由圓心到節圓 y 軸頂點畫一直線
+        self.create_line(midx, midy, midx, midy-rp)
+        # a 為模數 (代表公制中齒的大小), 模數為節圓直徑(稱為節徑)除以齒數
+        # 模數也就是齒冠大小
+        a=2*rp/n
+        # d 為齒根大小, 為模數的 1.157 或 1.25倍, 這裡採 1.25 倍
+        d=2.5*rp/n
+        # ra 為齒輪的外圍半徑
+        ra=rp+a
+        # rb 則為齒輪的基圓半徑
+        # 基圓為漸開線長齒之基準圓
+        rb=rp*math.cos(pa*deg)
+        # rd 為齒根圓半徑
+        rd=rp-d
+        # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+        # dr 則為基圓到齒頂圓半徑分成 imax 段後的每段半徑增量大小
+        # 將圓弧分成 imax 段來繪製漸開線
+        # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+        if rd>rb:
+            dr = (ra-rd)/imax
+        else:
+            dr=(ra-rb)/imax
+        # tan(pa*deg)-pa*deg 為漸開線函數
+        sigma=math.pi/(2*n)+math.tan(pa*deg)-pa*deg
+        for j in range(n):
+            ang=-2.*j*math.pi/n+sigma
+            ang2=2.*j*math.pi/n+sigma
+            lxd=midx+rd*math.sin(ang2-2.*math.pi/n)
+            lyd=midy-rd*math.cos(ang2-2.*math.pi/n)
+            for i in range(imax+1):
+                # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+                if rd>rb:
+                    r=rd+i*dr
+                else:
+                    r=rb+i*dr
+                theta=math.sqrt((r*r)/(rb*rb)-1.)
+                alpha=theta-math.atan(theta)
+                xpt=r*math.sin(alpha-ang)
+                ypt=r*math.cos(alpha-ang)
+                xd=rd*math.sin(-ang)
+                yd=rd*math.cos(-ang)
+                # i=0 時, 繪線起點由齒根圓上的點, 作為起點
+                if(i==0):
+                    last_x = midx+xd
+                    last_y = midy-yd
+                # 由左側齒根圓作為起點, 除第一點 (xd,yd) 齒根圓上的起點外, 其餘的 (xpt,ypt)則為漸開線上的分段點
+                self.create_line((midx+xpt),(midy-ypt),(last_x),(last_y),fill=color)
+                # 最後一點, 則為齒頂圓
+                if(i==imax):
+                    lfx=midx+xpt
+                    lfy=midy-ypt
+                last_x = midx+xpt
+                last_y = midy-ypt
+            # the line from last end of dedendum point to the recent
+            # end of dedendum point
+            # lxd 為齒根圓上的左側 x 座標, lyd 則為 y 座標
+            # 下列為齒根圓上用來近似圓弧的直線
+            self.create_line((lxd),(lyd),(midx+xd),(midy-yd),fill=color)
+            for i in range(imax+1):
+                # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
+                if rd>rb:
+                    r=rd+i*dr
+                else:
+                    r=rb+i*dr
+                theta=math.sqrt((r*r)/(rb*rb)-1.)
+                alpha=theta-math.atan(theta)
+                xpt=r*math.sin(ang2-alpha)
+                ypt=r*math.cos(ang2-alpha)
+                xd=rd*math.sin(ang2)
+                yd=rd*math.cos(ang2)
+                # i=0 時, 繪線起點由齒根圓上的點, 作為起點
+                if(i==0):
+                    last_x = midx+xd
+                    last_y = midy-yd
+                # 由右側齒根圓作為起點, 除第一點 (xd,yd) 齒根圓上的起點外, 其餘的 (xpt,ypt)則為漸開線上的分段點
+                self.create_line((midx+xpt),(midy-ypt),(last_x),(last_y),fill=color)
+                # 最後一點, 則為齒頂圓
+                if(i==imax):
+                    rfx=midx+xpt
+                    rfy=midy-ypt
+                last_x = midx+xpt
+                last_y = midy-ypt
+            # lfx 為齒頂圓上的左側 x 座標, lfy 則為 y 座標
+            # 下列為齒頂圓上用來近似圓弧的直線
+            self.create_line(lfx,lfy,rfx,rfy,fill=color)
+canvas = doc['onegear']
+ctx = canvas.getContext("2d")
+  
+# 以 button 驅動的事件函式
+def setgearnumber(e):
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    x = (canvas.width)/2
+    y = (canvas.height)/2
+    if doc["n"].value.isdigit():
+        n1 = int(doc["n"].value)
+    else:
+        n1= 25
+    # 設定齒輪參數
+    x = (canvas.width)/2
+    y = (canvas.height)/2
+    r = 0.6*(canvas.height/2)
+    pa = 20
+    # 繪出齒輪
+    Spur(ctx).Gear(x, y, r, n1, pa, "blue")
+#判定 button
+setgearnumber(True)
+doc['button'].bind('click',setgearnumber)
+</script><h2>貪食蛇</h2>
+<p>By : <a href="https://s40723210.github.io/40723210/content/%E8%B2%AA%E9%A3%9F%E8%9B%87.html">40723210</a></p>
+<div id="score">0</div>
+<!-- 以下利用 Brython 程式執行繪圖 -->
+<p><canvas height="320" id="gameCanvas" width="480"></canvas></p>
+<script type="text/javascript">
+const GAME_SPEED = 100;
+    const CANVAS_BORDER_COLOUR = 'black';
+    const CANVAS_BACKGROUND_COLOUR = "white";
+    const SNAKE_COLOUR = 'lightblue';
+    const SNAKE_BORDER_COLOUR = 'darkblue';
+    const FOOD_COLOUR = 'yellow';
+    const FOOD_BORDER_COLOUR = 'darkyellow';
+    let snake = [
+      {x: 150, y: 150},
+      {x: 140, y: 150},
+      {x: 130, y: 150},
+      {x: 120, y: 150},
+      {x: 110, y: 150}
+    ]
+    // 玩家的分数
+    let score = 0;
+    // changingDirection 为 true 时表示蛇正在改变方向
+    let changingDirection = false;
+    // 食物的 x 坐标
+    let foodX;
+    // 食物的 y 坐标
+    let foodY;
+    // 横向移动速度
+    let dx = 10;
+    // 纵向移动速度
+    let dy = 0;
+    // 获取 canvas 元素
+    const gameCanvas = document.getElementById("gameCanvas");
+    // 返回一个二维绘制上下文
+    const ctx = gameCanvas.getContext("2d");
+    // 开始游戏
+    main();
+    // 生成第一个食物位置
+    createFood();
+    // 按下任意一个键，都会调用 changeDirection
+    document.addEventListener("keydown", changeDirection);
+    /**
+     * 游戏的主函数
+     * 递归调用以推进游戏  
+     */
+    function main() {
+      // 判定游戏结束时提前返回从而终止游戏
+      if (didGameEnd()) return;
+      setTimeout(function onTick() {
+        changingDirection = false;
+        clearCanvas();
+        drawFood();
+        advanceSnake();
+        drawSnake();
+        // 再次调用 main
+        main();
+      }, GAME_SPEED)
+    }
+    /**
+     * 设置画布的背景色为 CANVAS_BACKGROUND_COLOUR 
+     * 并绘制画布的边框
+     */
+    function clearCanvas() {
+      //  选择画布的背景颜色
+      ctx.fillStyle = CANVAS_BACKGROUND_COLOUR;
+      //  选择画布的边框颜色
+      ctx.strokestyle = CANVAS_BORDER_COLOUR;
+      // 绘制一个“实心的”长方形来覆盖整个画布
+      ctx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
+      // 绘制画布的“边框”
+      ctx.strokeRect(0, 0, gameCanvas.width, gameCanvas.height);
+    }
+    /**
+     * 在画布上画食物
+     */
+    function drawFood() {
+      ctx.fillStyle = FOOD_COLOUR;
+      ctx.strokestyle = FOOD_BORDER_COLOUR;
+      ctx.fillRect(foodX, foodY, 10, 10);
+      ctx.strokeRect(foodX, foodY, 10, 10);
+    }
+    /**
+     * 根据蛇的水平移动速度改变蛇的 x 坐标，
+     * 根据蛇的垂直移动速度改变蛇的 y 坐标
+     */
+    function advanceSnake() {
+      // 绘制新的头部
+      const head = {x: snake[0].x + dx, y: snake[0].y + dy};
+      // 将新的头部放到蛇身体的第一个部位
+      snake.unshift(head);
+      const didEatFood = snake[0].x === foodX && snake[0].y === foodY;
+      if (didEatFood) {
+        // 增加分数
+        score += 10;
+        // 在屏幕上显示分数
+        document.getElementById('score').innerHTML = score;
+        // 生成新的食物
+        createFood();
+      } else {
+        // 移除蛇的最后一个部分
+        snake.pop();
+      }
+    }
+    /**
+     * 当蛇撞墙或者蛇头碰到蛇身的时候返回 true
+     */
+    function didGameEnd() {
+      for (let i = 4; i < snake.length; i++) {
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true
+      }
+      const hitLeftWall = snake[0].x < 0;
+      const hitRightWall = snake[0].x > gameCanvas.width - 10;
+      const hitToptWall = snake[0].y < 0;
+      const hitBottomWall = snake[0].y > gameCanvas.height - 10;
+      return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall
+    }
+    /**
+     * 给定一个最大值和最小值，生成一个 10 的倍数的随机数     
+     * @param { number } min —— 随机数的下限
+     * @param { number } max —— 随机数的上限
+     */
+    function randomTen(min, max) {
+      return Math.round((Math.random() * (max-min) + min) / 10) * 10;
+    }
+    /**     
+     * 随机生成食物坐标
+     */
+    function createFood() {
+      // 随机生成食物的 x 坐标
+      foodX = randomTen(0, gameCanvas.width - 10);
+      // 随机生成食物的 y 坐标
+      foodY = randomTen(0, gameCanvas.height - 10);
+      // 如果新生成的食物与蛇当前位置重叠，重新为食物生成一个位置
+      snake.forEach(function isFoodOnSnake(part) {
+        const foodIsoNsnake = part.x == foodX && part.y == foodY;
+        if (foodIsoNsnake) createFood();
+      });
+    }
+    /**
+     * 在画布上画蛇
+     */
+    function drawSnake() {
+      // 循环遍历蛇的每一部分，并将其绘制到画布上
+      snake.forEach(drawSnakePart)
+    }
+    /**
+     * 在画布上画蛇的一个部分
+     * @param { object } snakePart —— 需要绘制的部位的所在坐标
+     */
+    function drawSnakePart(snakePart) {
+      // 设置蛇身体的背景颜色
+      ctx.fillStyle = SNAKE_COLOUR;
+      // 设置蛇身的边框色
+      ctx.strokestyle = SNAKE_BORDER_COLOUR;
+      // 在蛇身坐标所在的位置，绘制“实心”的矩形以表示蛇      
+      ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+      // 绘制蛇身的边框
+      ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+    }
+    /**     
+     * 根据按下的键，改变蛇的水平移动速度和垂直移动速度
+     * 为了避免蛇反转，蛇的移动方向不能直接变成相反的方向，
+     * 比如说，当前方向是“向右”，那么下一个方向不能是“向左”
+     * @param { object } event —— 键盘事件
+     */
+    function changeDirection(event) {
+      const LEFT_KEY = 37;
+      const RIGHT_KEY = 39;
+      const UP_KEY = 38;
+      const DOWN_KEY = 40;
+      /**
+       * 避免贪食蛇掉头
+       * 举个例子：
+       * 蛇正在向右移动。玩家按下向下键然后迅速地按下向左键。
+       * 此时蛇不会先向下移动一步，而会马上改变方向
+       */
+      if (changingDirection) return;
+      changingDirection = true;
+
+      const keyPressed = event.keyCode;
+      const goingUp = dy === -10;
+      const goingDown = dy === 10;
+      const goingRight = dx === 10;
+      const goingLeft = dx === -10;
+      if (keyPressed === LEFT_KEY && !goingRight) {
+        dx = -10;
+        dy = 0;
+      }
+
+      if (keyPressed === UP_KEY && !goingDown) {
+        dx = 0;
+        dy = -10;
+      }
+
+      if (keyPressed === RIGHT_KEY && !goingLeft) {
+        dx = 10;
+        dy = 0;
+      }
+
+      if (keyPressed === DOWN_KEY && !goingUp) {
+        dx = 0;
+        dy = 10;
+      }
+    }
+</script><h1>期中報告</h1>
 <p>張詠全 40723125  <a href="https://www.youtube.com/watch?v=4u0I4kbcKEQ&amp;feature=youtu.be">影片</a></p>
 <p>廖豪樹 40723144 <a href="https://www.youtube.com/watch?v=4K0S9rhXCvo">影片</a></p>
 <p>李其叡 40723111 <a href="https://www.youtube.com/watch?v=0IoCMM3iR8g">影片</a></p>
 <p>李承澤 40723210 <a href="https://www.youtube.com/watch?v=avqyumgR6a8">影片</a></p>
 <p>王頊鑌 40723108 <a href="https://www.youtube.com/watch?v=31-Xd2pF420">影片</a></p>
 <p>許鐸鐙40426227 <a href="https://www.youtube.com/watch?v=a_hXbj98JwI">影片</a></p>
-<p>俆敬倫40723124 <a href="https://www.youtube.com/watch?v=5rifHN7pBY8">影片</a></p>
+<p>俆敬倫40723124 <a href="https://www.youtube.com/watch?v=5rifHN7pBY8">影片</a></p><h1>期末報告</h1>
+<p><span>李承澤 40723210 <a href="https://youtu.be/AluWz93FsKE">影片<br/><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/AluWz93FsKE" width="560"></iframe><br/></a></span></p>
