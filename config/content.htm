@@ -50,6 +50,19 @@
 <h2>1.李其叡40723111</h2>
 <p><span>了解機械設計系電腦輔助設計室電腦的網路設定, 其中包括 IPv4 網路與 IPv6 網路設定.</span></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/mBNL7XV1Gq4" width="560"></iframe></p>
+<h2>1.王頊鑌40723108</h2>
+<p>1.進入網頁之後在按右上角符號裡的設定</p>
+<p>2.滾到最下面&gt;按進階&gt;點擊 (開啟proxy設定)</p>
+<p>3.點選LAN設定&gt;打開proxy&gt;輸入140.130.17.32&gt;3128即可</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/gdiPQfzP4IE" width="560"></iframe></p>
+<p><strong>IPv6 環境設定 操作過程:</strong></p>
+<p>1.進入控制台開啟網路連線</p>
+<p>2.選擇自己所用的網路 &gt; 右鍵內容</p>
+<p>3.勾選IPV6並取消IPV4，點選進入IPV6</p>
+<p>4.使用DNS輸入 2001:b000:168::1</p>
+<p>5.在網頁的proxy中設定完即可</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/CTyjVUVgzJE" width="560"></iframe></p>
+<p></p>
 <h1>配置可攜程式環境</h1>
 <p>取得 Windows 10 64 位元環境下的可攜程式環境 (下載  2019_cdb_w5.7z), 下載後解開目錄, 放入 USB3.0 規格以上的隨身碟或隨身硬碟.<br/><br/>以滑鼠點擊 start.bat 開啟可攜隨身系統, 以 stop.bat 關閉可攜隨身系統, 隨身碟必須在關閉所有應用程式執行下, 才可正常退出.<br/><br/>了解基本的 DOS (Disk Operating System) 指令<br/><br/>C:\&gt; 符號為 DOS 命令列視窗的回應 (Prompt), 表示目前在 C 槽硬碟的 \ 根目錄, 若要切換到 Y 槽, 則在電腦的回應後, 輸入 Y:, 命令列將轉為<br/><br/>Y:\&gt;<br/><br/>若要更換目錄, 則使用 cd, 也就是 change directory 的意思, 例如:<br/><br/>Y:\&gt;cd tmp<br/><br/>表示要從 Y 槽的根目錄更換到 tmp 目錄, 也就是<br/><br/>Y:\tmp&gt;<br/><br/>若要再回到 Y 槽的根目錄, 可以使用 cd ..<br/><br/>表示要從目前所在目錄, 往上跳回一個目錄, 也就是重新回到 Y 槽的根目錄.<br/><br/>另外, 無論目前位於哪一個子目錄, 也可以使用 cd \<br/><br/>直接回到根目錄.<br/><br/>或者從 Y:\&gt; 直接使用<br/><br/>cd \tmp\repo\ssh\wcm2019<br/><br/>直接從 Y 槽的根目錄, 跳進 Y:\tmp\repo\ssh\wcm2019&gt;<br/><br/>此外, 常用的 DOS 指令有:<br/><br/>dir - 列出目前所在目錄的內容<br/><br/>mkdir - 隨後加上要建立目錄的名稱, 可以建立目錄<br/><br/>cls - clear screen, 清除目前的命令列顯示的內容<br/><br/></p>
 <h2>2.李承澤 40723210</h2>
@@ -82,6 +95,14 @@
 <p><span>dir   列出目前所在目錄的內容</span></p>
 <p><span>mkdir  在所在位置建立目錄</span></p>
 <p>cls  <span>清除目前的命令列顯示的內容</span></p>
+<h2>2王頊鑌40723108</h2>
+<p>1.進入老師的blogger點選<a href="https://drive.google.com/file/d/12IOfTpupXL0czFM_ZeHt-6sxfXwZK6ai/view">2019_cdb_w13.7z</a>連結</p>
+<p>2.下載完成以後，解壓縮放進自己的隨身碟</p>
+<p>3.點選start.bat來開啟程式</p>
+<p>4.個人是用F:&gt;cd 4023108</p>
+<p>5.進入後就可以進行改動了</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/rXP0qsbzQEw" width="560"></iframe></p>
+<p></p>
 <h1>倉儲改版</h1>
 <p>建立 Git 倉儲, 並 clone 倉儲至近端工作後, 對遠端倉儲改版<br/><br/>可攜程式系統中已經內建 git, 可以在啟動 start.bat 後, 透過 path 的設定, 直接執行 git 指令.<br/><br/>建立 Git 倉儲, 共分為兩類, 一類是直接在 Github 網際介面下建立倉儲時, 要求建立 README.md 檔案, 之後可以直接在近端, 以 git clone 加上倉儲連線 URL, 將倉儲克隆一份到近端, 並以最新版本作為工作目錄, 使用者改版後, 可以直接透過 git add, commit 與 push 對遠端倉儲改版.<br/><br/>另一類則是故意在 Github 網際介面下建立倉儲時, 不要建立任何檔案, 而是在近端自行利用 git 指令建立倉儲架構, 新增內容後, 以 git remote add 設法在近端倉儲中納入 origin URL 後, 將近端倉儲版本新增提交推送到遠端.<br/><br/>git add<br/><br/>git add 可以用來新增一個檔案, 數個檔案, 或在之前提交後所新增的所有內容.<br/><br/>git add 在 GIT 架構下, 是對所新增或修改的內容拍快照:<br/><br/>git add . adds all modified and new (untracked) files in the current directory and all subdirectories to the staging area (a.k.a. the index), thus preparing them to be included in the next git commit . Any files matching the patterns in the .gitignore file will be ignored by git add<br/><br/>git commit <br/><br/>git commit 執行之前, 必須使用 git config 建立臨時或永久的身分註記, 因為 GIT 在展開所有改版內容時, 必須明確登錄這些變更的作者與時間.<br/><br/>當使用者採用 git commit -m "改版說明訊息", 此次提交到 .git 目錄下的更動內容, 均會綁定使用者身分與改版所輸入的說明訊息.<br/><br/>git push<br/><br/>git push 在隨後沒有輸入遠端 URL 代號時, 表示要推送到 origin, 若透過 git remote add 設定其他代號與 URL 對應時, git push 加上代號, 就可以將此次的提交內容, 推送到指定的 URL 所在遠端倉儲.<br/><br/><br/></p>
 <h2>3.李承澤 40723210</h2>
@@ -118,6 +139,16 @@
 <p><span>6.推送回github </span><span>存檔</span></p>
 <p><span>7.回到你的github &gt;string&gt;找到你的github page </span></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/Mq7WRW-kRnA" width="560"></iframe></p>
+<h2>3王頊鑌40723108</h2>
+<p>1.先登入自己的github帳號。</p>
+<p>2.創建一個新的倉儲repositories。</p>
+<p><span><span>3.git clone<span> </span></span></span><a href="https://github.com/s40723108/40723108"><span><span>https://github.com/s40723108/40723108</span></span></a><span><span><span> </span> 。</span></span></p>
+<p>4.進入要存放該資料的資料夾tmp。</p>
+<p>5.開啟倉儲設定，點選要推送的branch。</p>
+<p>6.進入該倉儲資料夾，開始更新或變動。</p>
+<p>7.git status &gt; git add . &gt; git commit -m "隨便打" &gt; git push。</p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/T23gb9P2mWk" width="560"></iframe></p>
+<p></p>
 <h1>靜態 CMSimfly</h1>
 <p>利用 CMSimfly (https://github.com/chiamingyen/cmsimfly) 內容, 建立自己的 Github Pages 網站<br/><br/>設法利用 <a href="http://mde.tw/wcm2019/content/%E5%AF%A6%E7%BF%92%E9%A0%85%E7%9B%AE%E4%B8%89.html">HTML5 CSS 與 Javascript</a>, 納入與機械設計相關的靜態網頁內容</p>
 <h2>4.李承澤 40723210</h2>
@@ -140,6 +171,10 @@
 <p>利用 CMSimfly (https://github.com/chiamingyen/cmsimfly) 內容, 建立自己的 Github Pages 網站</p>
 <p><br/>設法利用<span> </span><a href="http://mde.tw/wcm2019/content/%E5%AF%A6%E7%BF%92%E9%A0%85%E7%9B%AE%E4%B8%89.html">HTML5 CSS 與 Javascript</a>, 納入與機械設計相關的靜態網頁內容</p>
 <p><span>1.進入自己的倉儲資料夾</span><br/><span><br/></span><span></span><span>2.輸入python wsgi.py來開啟動態</span><br/><span><br/></span><span></span><span>3.進行改版或更新save</span><br/><span><br/></span><span></span><span>4.完成後按generate_pages來儲存</span><br/><span><br/></span><span></span><span>5.輸入git status &gt; git add . &gt; git commit -m "標題" &gt; git push</span><br/><span><br/></span><span></span><span>6.到自己的倉儲檢查沒問題後即可</span></p>
+<h2>4王頊鑌40723108</h2>
+<p><strong><span>操作流程和影片:</span></strong></p>
+<p><span>1.進入自己的倉儲資料夾</span><br/><span><br/></span><span></span><span>2.輸入python wsgi.py來開啟動態</span><br/><span><br/></span><span></span><span>3.進行改版或更新save</span><br/><span><br/></span><span></span><span>4.完成後按generate_pages來儲存</span><br/><span><br/></span><span></span><span>5.輸入git status &gt; git add . &gt; git commit -m "標題" &gt; git push</span></p>
+<p><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/DGtMFfITT0k" width="560"></iframe></span></p>
 <h1>Mobile 網站內容</h1>
 <p><br/><br/>學習如何使用 CMSimfly, 在網站中加入各種內容 (導入 Bootstrap frontend framework)<br/><br/>使用 Flask, bs4 與 lxml 模組<br/><br/>了解 CMSimfly 如何建構, 並且嘗試修改現有功能, 除錯或建立自己的網際內容管理系統<br/><br/></p>
 <h2>5.李承澤 40723210</h2>
@@ -148,6 +183,11 @@
 <p><span>1.要使用老師模板的話，先進到老師的Github</span><br/><span><br/></span><span></span><span>2.點選系統開發 &gt; Mobile 網站內容 &gt; 套用模板一</span><br/><span><br/></span><span></span><span>3.進到連結後下載zip &gt; 解壓縮 &gt;改名成chimper</span><br/><span><br/></span><span></span><span>4.進到要改的倉儲 &gt;  將資料夾放入static資料夾內</span><br/><span><br/></span><span></span><span>5.開起一個老師的新模板倉儲 &gt; 以Raw打開cmsimfly.leo</span><br/><span><br/></span><span></span><span>6.複製全部 &gt; 到自己的倉儲cmsimfly.leo &gt; 貼上並儲存</span><br/><span><br/></span><span></span><span>7.以Raw打開老師的flaskapp.py &gt; 一樣步驟貼上並儲存</span><br/><span><br/></span><span></span><span>8.進入動態更改 &gt; 直接按generate_pages儲存即可</span><br/><span><br/></span><span></span><span>我的教學影片:<a href="https://youtu.be/DKVSZYUkotI">https://youtu.be/DKVSZYUkotI</a></span><br/><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" data-mce-fragment="1" frameborder="0" height="390" src="https://www.youtube.com/embed/DKVSZYUkotI" width="590"></iframe></p>
 </div>
 <p></p>
+<h2>5王頊鑌40723108</h2>
+<p><strong><span>操作流程和影片:</span></strong></p>
+<p><span>1.要使用老師模板的話，先進到老師的Github</span><br/><span><br/></span><span></span><span>2.點選系統開發 &gt; Mobile 網站內容 &gt; 套用模板一</span><br/><span><br/></span><span></span><span>3.進到連結後下載zip &gt; 解壓縮 &gt;改名成chimper</span><br/><span><br/></span><span></span><span>4.進到要改的倉儲 &gt;  將資料夾放入static資料夾內</span><br/><span><br/></span><span></span><span>5.開起一個老師的新模板倉儲 &gt; 以Raw打開cmsimfly.leo</span><br/><span><br/></span><span></span><span>6.複製全部 &gt; 到自己的倉儲cmsimfly.leo &gt; 貼上並儲存</span><br/><span><br/></span><span></span><span>7.以Raw打開老師的flaskapp.py &gt; 一樣步驟貼上並儲存</span><br/><span><br/></span><span></span><span>8.進入動態更改 &gt; 直接按generate_pages儲存即可</span></p>
+<p><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/9Tn1RzSzVeU" width="560"></iframe></span></p>
+<p><span></span></p>
 <h1>Virtual Host</h1>
 <p>Fossil SCM<br/><br/>如何利用 Fossil SCM, 在 Virtualbox 中的 Ubuntu 18.04-2 (8.5 GB) 建立類似 Github 的系統, 可以放入 CMSimfly 的靜態網頁<br/><br/>Ubuntu 18.04 (https://www.ubuntu.com/about/release-cycle), 配置網路連線, 然後架構 uwsgi 環境下的 CMSimfly 動態網站, 或建立 Fossil SCM 用來伺服管理 CMSimfly 下有版次管理的靜態網頁, 或利用 nginx 伺服無版次管理的 CMSimfly 靜態網頁.</p>
 <p></p>
@@ -183,6 +223,10 @@
 <p><strong>架設虛擬主機</strong></p>
 <p><span>1.google輸入ubuntu &gt; 點選官網 &gt; 下載</span><span>ubuntu server</span><br/><span><br/></span><span></span><span>2.打開virtualbox &gt; New &gt; 輸入名子 &gt; 4096 MB</span><br/><span><br/></span><span></span><span>3.Cearte &gt; VMDK &gt; Dynamically &gt; 500.00 GB</span><br/><span><br/></span><span></span><span>4.Sttings &gt; Network &gt; bridged Adapter &gt; 進入網路中心</span><br/><br/><span>5.選擇電腦所使用的連接網路 &gt; ok &gt; Start</span><br/><span><br/></span><span></span><span>6.選取剛剛所下載的ubuntu &gt; 開始 &gt; 選取語言</span><br/><br/><span>7.Enter &gt; </span><span>Enter &gt; 輸入proxy :http://140.130.17.3:3128</span><br/><span><br/></span><span></span><span>8.</span><span>Enter</span><span> &gt; </span><span>Enter</span><span> &gt; </span><span>Enter</span><span> &gt; continue &gt; 全部都打一樣的</span><br/><span><br/></span><span></span><span>9.space &gt; </span><span>Enter</span><span> &gt; </span><span>Enter</span><span> &gt; 再輸入帳密 &gt; 即可開始設定</span><br/><br/><span>10.<span> 輸入</span><span>sudo apt install uwsgi 來安裝uwsgi</span></span></p>
 <p><span><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/ZtOK_dafs50" width="560"></iframe></span></span></p>
+<h2>6王頊鑌40723108</h2>
+<p>步驟</p>
+<p><span>1.google輸入ubuntu &gt; 點選官網 &gt; 下載</span><span>ubuntu server</span><br/><span><br/></span><span></span><span>2.打開virtualbox &gt; New &gt; 輸入名子 &gt; 4096 MB</span><br/><span><br/></span><span></span><span><span><span>3.Cearte&gt; VMDK&gt;動態&gt; 500.00 GB</span></span></span><br/><span><br/></span><span></span><span>4.Sttings &gt; Network &gt; bridged Adapter &gt; 進入網路中心</span><br/><br/><span>5.選擇電腦所使用的連接網路 &gt; ok &gt; Start</span><br/><span><br/></span><span></span><span>6.選取剛剛所下載的ubuntu &gt; 開始 &gt; 選取語言</span><br/><br/><span>7.Enter &gt; </span><span>Enter &gt; 輸入proxy :http://140.130.17.3:3128</span><br/><span><br/></span><span></span><span>8.</span><span>Enter</span><span> &gt; </span><span>Enter</span><span> &gt; </span><span>Enter</span><span> &gt; continue &gt; 全部都打一樣的</span><br/><span><br/></span><span></span><span>9.space &gt; </span><span>Enter</span><span> &gt; </span><span>Enter</span><span> &gt; 再輸入帳密 &gt; 即可開始設定</span><br/><br/><span>10.<span> 輸入</span><span>sudo apt install uwsgi 來安裝uwsgi</span></span></p>
+<p><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/bhl6tvAh-9o" width="560"></iframe></span></p>
 <h1>Javascript</h1>
 <p><span>設法利用 </span><a href="http://mde.tw/wcm2019/content/%E5%AF%A6%E7%BF%92%E9%A0%85%E7%9B%AE%E4%B8%89.html">HTML5 CSS 與 Javascript</a><span>, 納入與機械設計相關的靜態網頁內容6</span></p>
 <p><span></span></p>
@@ -568,7 +612,8 @@ ctx.closePath()
 ctx.fillStyle = '#fff'
 ctx.fill()
 </script>
-</p><h2>齒輪</h2>
+</p>
+<h2>齒輪</h2>
 <!-- 導入 Brython 標準程式庫 -->
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
@@ -1095,3 +1140,5 @@ const GAME_SPEED = 100;
 <p><span>張詠全40723125 <a href="https://youtu.be/Q-ALqaMvjuA"> 影片</a><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/Q-ALqaMvjuA" width="560"></iframe></span></p>
 <p><span>李其叡40723111<a href="https://www.youtube.com/watch?v=8DVgka3JTwM&amp;feature=youtu.be">影片</a></span></p>
 <p><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/8DVgka3JTwM" width="560"></iframe></span></p>
+<p><span>王頊鑌40723108<a href="https://www.youtube.com/watch?v=6UnosNEeQ0s">影片</a></span></p>
+<p><span><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/6UnosNEeQ0s" width="560"></iframe></span></p>
